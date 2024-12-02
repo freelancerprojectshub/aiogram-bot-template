@@ -2,7 +2,7 @@ import asyncio
 import logging
 
 from aiogram import Bot, Dispatcher
-
+from aiogram.client.bot import DefaultBotProperties
 from config import Config, load_config
 from src.handlers import echo
 
@@ -21,7 +21,7 @@ async def main():
 
     config: Config = load_config()
 
-    bot: Bot = Bot(token=config.tg_bot.token, parse_mode="HTML")
+    bot: Bot = Bot(token=config.tg_bot.token, default=DefaultBotProperties(parse_mode='HTML'))
     dp: Dispatcher = Dispatcher()
 
     dp.include_router(echo.router)
